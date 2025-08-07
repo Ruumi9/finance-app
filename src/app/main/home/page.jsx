@@ -1,7 +1,7 @@
 "use client"
 
 import axiosInstance from "@/lib/axios";
-import { useState } from "react";
+import { useRef, useState } from "react";
 // axiosInstance
 
 
@@ -11,6 +11,11 @@ function homePage() {
     const [rupiahMask, setRupiahMask] = useState(false);
     const [balance, setBalance] = useState(20000000);
     const [datas, setDatas] = useState();
+
+    const transactionNameRef = useRef(null);
+    const transactionTypeRef = useRef(null);
+    const transactionCostRef = useRef(null);
+    const transactionDetailRef = useRef(null)
 
     function handleEyeClick() {
         setRupiahMask(prev => !prev)
@@ -25,12 +30,27 @@ function homePage() {
         }
     }
 
-    
+
 
     function hanldeSubmit() {
         // const data = datas;
 
         // sendData(data);
+        const transactionDetails = transactionDetailRef.current.value;
+        const transactionName = transactionNameRef.current.value;
+        const transactionType = transactionTypeRef.current.value;
+        const transactionCost = transactionCostRef.current.value;
+
+        const data = {
+            [transactionName]: {
+                details: transactionDetails,
+                type: transactionType,
+                cost: transactionCost
+            }
+        }
+
+        sendData(data);
+
     }
 
     return (
@@ -189,14 +209,14 @@ function homePage() {
                     <h3 className="font-bold text-lg">Form</h3>
                     <div className="flex flex-col space-y-3 w-full">
                         <label htmlFor="">Transaction Name</label>
-                        <input className="w-full input" type="text" />
+                        <input ref={transactionNameRef} className="w-full input" type="text" />
                         <label htmlFor="">Type</label>
-                        <select className="w-full select" name="" id="">
-                            <option value="">Send</option>
-                            <option value="">Recieve</option>
+                        <select ref={transactionTypeRef} className="w-full select" name="" id="">
+                            <option value="Send">Send</option>
+                            <option value="Recieve">Recieve</option>
                         </select>
-                        <input className="w-full input" type="text" />
-                        <input className="w-full input" type="number" />
+                        <input ref={transactionDetailRef} className="w-full input" type="text" />
+                        <input ref={transactionCostRef} className="w-full input" type="number" />
                     </div>
                     <div className="modal-action">
                         <form method="dialog">
