@@ -1,5 +1,10 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import SidebarWrapper from "@/components/SidebarWrapper";
+import NavbarWrapper from "@/components/NavbarWrapper";
+
+// Sidebar
+// import { useState } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,49 +22,31 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+
+
   return (
-    <html lang="en" data-theme="light">
+    <html lang="en" data-theme="dark">
+      <head>
+        <link
+          href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+          rel="stylesheet"
+        />
+
+        <link
+          href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+          rel="stylesheet"
+        />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet"></link>
+      </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-base-100 w-full text-base-content`}
+        className={`${geistSans.variable} ${geistMono.variable} flex antialiased bg-base-100 text-base-content font-poppins w-full h-full`}
       >
-        <div className="navbar fixed md:relative shadow-sm md:shadow-none bg-base-100">
-          <div className="navbar-start">
-            <a className="btn btn-ghost text-xl">daisyUI</a>
-          </div>
-          <div className="hidden md:navbar-center">
-            <a className="btn btn-ghost text-sm">All</a>
-            <a className="btn btn-ghost text-sm">Transaction</a>
-            <a className="btn btn-ghost text-sm">Analysic</a>
-            <a className="btn btn-ghost text-sm">Expenses</a>
-            <a className="btn btn-ghost text-sm">Spending</a>
-          </div>
-          <div className="navbar-end">
-            <input type="text" placeholder="Search" className="input md:inline hidden  input-bordered w-24 md:mr-5 md:w-auto" />
-            <i className="ri-settings-line md:mr-5 hidden md:inline"></i>
-            <div className="dropdown dropdown-end">
-              <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                <div className="w-10 rounded-full">
-                  <img
-                    alt="Tailwind CSS Navbar component"
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-                </div>
-              </div>
-              <ul
-                tabIndex={0}
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-5 w-52 p-2 shadow">
-                <li>
-                  <a className="justify-between">
-                    Profile
-                    <span className="badge">New</span>
-                  </a>
-                </li>
-                <li><a>Settings</a></li>
-                <li><a>Logout</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div className="pt-10 md:pt-0">
+
+        <SidebarWrapper />
+        <NavbarWrapper />
+        <div className="max-w-screen w-screen">
           {children}
         </div>
       </body>

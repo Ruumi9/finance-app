@@ -1,6 +1,15 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
 
 export const metadata = {
   title: "Create Next App",
@@ -9,26 +18,26 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="light">
       <body
-        className={`antialiased bg-base-100 w-screen text-base-content`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-base-100 w-full text-base-content`}
       >
-        <div className="navbar bg-base-100 p-5">
-          <div className="flex">
-            <a className="btn btn-ghost text-black text-xl">daisyUI</a>
+        <div className="navbar fixed md:relative shadow-sm md:shadow-none bg-base-100">
+          <div className="navbar-start">
+            <a className="btn btn-ghost text-xl">daisyUI</a>
           </div>
-          <div className="flex-1 text-center space-x-10">
-            <p className="text inline">All</p>
-            <p className="text inline">Transaction</p>
-            <p className="text inline">Analysic</p>
-            <p className="text inline">Expenses</p>
-            <p className="text inline">Spending</p>
+          <div className="hidden md:navbar-center">
+            <a className="btn btn-ghost text-sm">All</a>
+            <a className="btn btn-ghost text-sm">Transaction</a>
+            <a className="btn btn-ghost text-sm">Analysic</a>
+            <a className="btn btn-ghost text-sm">Expenses</a>
+            <a className="btn btn-ghost text-sm">Spending</a>
           </div>
-          <div className="flex gap-2">
-            <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-56" />
-            <i className="ri-settings-line text-2xl mx-3 my-1"></i>
+          <div className="navbar-end">
+            {/* <input type="text" placeholder="Search" className="input md:inline hidden  input-bordered w-24 md:mr-5 md:w-auto" /> */}
+            <i className="ri-settings-line md:mr-5 hidden md:inline"></i>
             <div className="dropdown dropdown-end">
-              <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+              <div role="button" className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full">
                   <img
                     alt="Tailwind CSS Navbar component"
@@ -36,8 +45,8 @@ export default function RootLayout({ children }) {
                 </div>
               </div>
               <ul
-                tabIndex={0}
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+              
+                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-5 w-52 p-2 shadow">
                 <li>
                   <a className="justify-between">
                     Profile
@@ -50,7 +59,9 @@ export default function RootLayout({ children }) {
             </div>
           </div>
         </div>
-        {children}
+        <div className="pt-10 md:pt-0">
+          {children}
+        </div>
       </body>
     </html>
   );
